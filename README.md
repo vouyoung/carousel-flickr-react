@@ -1,5 +1,7 @@
 ## Basic Flickr Image Carousel using React without 3rd Party Library.
 
+production url: http://vincentouyoung.com/carousel-react-flickr/
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
