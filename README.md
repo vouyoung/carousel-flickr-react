@@ -1,4 +1,4 @@
-Basic Flickr Image Carousel using React without 3rd Party Library.
+## Basic Flickr Image Carousel using React without 3rd Party Library.
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
