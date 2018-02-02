@@ -19,8 +19,18 @@ class App extends Component {
   }
 
   setImagebyIndex = (e) => {
-    const current = e.target.getAttribute('index');
+    const current = e.target.getAttribute('data-index'); console.log(current);
     this.setState({ indexVal: current, barPosition: current * -178 });
+    this.setActive(current);
+  }
+
+  setActive = (cur) => {
+    var imgs = document.querySelectorAll('#thumbNailBar > img');
+    for (var i = 0; i < imgs.length; i++) {
+      imgs[i].classList.remove('active');
+    }
+    var target = document.querySelectorAll(`#thumbNailBar > img[data-index="${cur}"]`);
+    target[0].classList.add("active");
   }
 
   Debounce = (function () {
@@ -42,6 +52,7 @@ class App extends Component {
       current++;
     }
     this.setState({ indexVal: current, barPosition: current * -178 });
+    this.setActive(current);
   }
 
   prevHandler = () => {
@@ -52,6 +63,7 @@ class App extends Component {
       current--;
     }
     this.setState({ indexVal: current, barPosition: current * -178 });
+    this.setActive(current);
   }
 
   RefreshImageSet = () => {
@@ -64,7 +76,7 @@ class App extends Component {
         const imgUrl = `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`;
         return (
           <img
-            index={i}
+            data-index={i}
             key={photo.id}
             alt={photo.title}
             src={imgUrl}
@@ -105,9 +117,10 @@ class App extends Component {
         </div>
         <div className="barWrapper">
           <div
+            id="thumbNailBar"
             className="thumbNailBar"
             style={{
-              width: `(${this.state.pictures.length} * 178)px`,
+              width: `${this.state.pictures.length*178}px`,
               left: `${this.state.barPosition}px` }}
           >
             {this.state.pictures}

@@ -75,12 +75,22 @@
 
 .thumbNailBar{
   position: absolute;
-  height: 120px;
+  height: 100px;
+  transition: left 0.5s ease-in-out;
 }
 .thumbNailBar img{
   cursor:pointer;
   float: left;
   width: 178px;
+  height: 100px;
+  -webkit-box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  -ms-box-sizing:border-box;
+  box-sizing:border-box;
+}
+
+.thumbNailBar img.active{
+  border:5px solid fuchsia
 }
 
 @keyframes App-logo-spin {
