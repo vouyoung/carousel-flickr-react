@@ -19,18 +19,18 @@ class App extends Component {
   }
 
   setImagebyIndex = (e) => {
-    const current = e.target.getAttribute('data-index'); console.log(current);
+    const current = e.target.getAttribute('data-index');
     this.setState({ indexVal: current, barPosition: current * -178 });
     this.setActive(current);
   }
 
   setActive = (cur) => {
-    var imgs = document.querySelectorAll('#thumbNailBar > img');
-    for (var i = 0; i < imgs.length; i++) {
+    const imgs = document.querySelectorAll('#thumbNailBar > img');
+    const target = document.querySelectorAll(`#thumbNailBar > img[data-index="${cur}"]`);
+    for (let i = 0; i < imgs.length; i++) {
       imgs[i].classList.remove('active');
     }
-    var target = document.querySelectorAll(`#thumbNailBar > img[data-index="${cur}"]`);
-    target[0].classList.add("active");
+    if(target[0])target[0].classList.add('active');
   }
 
   Debounce = (function () {
@@ -74,6 +74,13 @@ class App extends Component {
     .then(function (data) {
       const photoArray = data.photos.photo.map((photo, i) => {
         const imgUrl = `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`;
+        let imgState;
+        if (i === 0) {
+          imgState = 'active'
+        } else {
+          imgState = '';
+        }
+
         return (
           <img
             data-index={i}
@@ -81,6 +88,7 @@ class App extends Component {
             alt={photo.title}
             src={imgUrl}
             onClick={this.setImagebyIndex}
+            className={imgState}
           />
         );
       });
